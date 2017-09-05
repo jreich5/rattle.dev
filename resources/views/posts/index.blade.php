@@ -17,7 +17,7 @@
                 <h5 class="text-right">Sort By</h5>
             </div>
             <div class="col-md-2">
-                <form method="GET" action="{{ action('PostController@index') }}">
+                <form method="GET" action="{{ action('PostsController@index') }}">
                     <div class="form-group">
                         <select class="form-control" name="sort">
                             <option value="alpha">Alphabetical</option>
