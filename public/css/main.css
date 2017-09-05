@@ -1,0 +1,8 @@
+/* Main CSS */
+
+
+
+/* Nav Bar */
+.navbar, .navbar-inverse {
+	border-radius: 0 !important;
+}
