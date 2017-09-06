@@ -23,14 +23,5 @@ class UsersTableSeeder extends Seeder
         $user1->password = Hash::make(env('USER_PASSWORD'));
         $user1->save();
 
-        $faker = Faker\Factory::create();
-
-        for($i = 0; $i < 10; $i++) {
-            $user = new \App\User();
-            $user->name = $faker->userName;
-            $user->password = Hash::make($faker->password);
-            $user->email = $faker->safeEmail;
-            $user->save();
-        }
     }
 }
