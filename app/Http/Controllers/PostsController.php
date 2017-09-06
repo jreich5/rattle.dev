@@ -25,20 +25,18 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $resultsPerPage = 10)
+    public function index(Request $request)
     {
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $posts = Post::where('title', 'like', '%' . $search . '%')->orWhere('title', 'like', '%' . $search . '%')->orderBy('created_at')->paginate(10);
-        } else {
-            $posts = Post::orderBy('created_at')->paginate($resultsPerPage);
-        }
 
-        if (empty($search)) {
-            $search = "";
-        }
+        $search = ($request->has('search')) ? $request->search : "";
+        $per = ($request->has('per')) ? $request->per : 5;
+        $sort = ($request->has('sort')) ? $request->sort : "alpha";
+
+        $posts = Post::search($search, $per, $sort);
 
         $data['search'] = $search;
+        $data['per'] = $per;
+        $data['sort'] = $sort;
         $data['posts'] = $posts;
 
         return view('posts.index')->with($data);
