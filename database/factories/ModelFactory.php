@@ -28,3 +28,11 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'created_by' => rand(1, 50),
     ];
 });
+
+$factory->define(App\Models\Vote::class, function (Faker\Generator $faker) {
+    return [
+        'vote' => rand(-1, 1),
+        'user_id' => rand(1, 50),
+        'post_id' => rand(1, 100),
+    ];
+});
