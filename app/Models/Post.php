@@ -14,21 +14,56 @@ class Post extends BaseModel
         'content' => 'required|unique:posts,content'
     ];
 
-    // // Accessor
-    // public function getTitleAttribute($value)
-    // {
-    //     return "Super Mega " . strtoupper($value);
-    // }
-
-    // // Mutator
-    // public function setTitleAttribute($value)
-    // {
-    //     $this->attributes['title'] = strtolower($value);
-    // }
-
-    public function search($query, $search)
+    public static function search($search, $per, $sort)
     {
-        return $query->where('title', 'LIKE', '%search%');
+        $order = self::siftSort($sort);
+        $pagination = self::siftPer($per);
+
+        return Post::whereHas('user', function($query) use ($search){
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->orWhere('title', 'LIKE', "%$search%")
+            ->orWhere('content', 'LIKE', "%$search%")
+            ->orderBy($order[0], $order[1])
+            ->paginate($pagination);
+    }
+
+    protected static function siftSort($sort)
+    {
+        switch($sort) {
+            case "alpha":
+                return ['title', 'asc'];
+                break;
+            // This will be changed when votes are added
+            case "votehl":
+                return ['title', 'asc'];
+                break;
+            // This will be changed when votes are added
+            case "votelh":
+                return ['title', 'asc'];
+                break;
+            case "recent":
+                return ["created_at", "desc"];
+                break;
+        }
+    }
+
+    protected static function siftPer($per)
+    {
+        switch($per) {
+            case "five":
+                return 5;
+                break;
+            case "ten":
+                return 10;
+                break;
+            case "twenty":
+                return 20;
+                break;
+            case "thirty":
+                return 30;
+                break;
+        }
     }
 
     public function user()
