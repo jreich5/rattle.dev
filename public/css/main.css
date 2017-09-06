@@ -6,3 +6,26 @@
 .navbar, .navbar-inverse {
 	border-radius: 0 !important;
 }
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 200px;
+}
+main {
+	min-height: 80vh;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 160px;
+  background-color: #f5f5f5;
+}
