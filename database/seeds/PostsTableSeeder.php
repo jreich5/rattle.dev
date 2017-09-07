@@ -19,6 +19,7 @@ class PostsTableSeeder extends Seeder
             $post->title = $faker->catchPhrase;
             $post->content = $faker->bs;
             $post->created_by = \App\User::all()->random()->id;
+            $post->votes = rand(-20, 20);
             $post->save();
         }
     }

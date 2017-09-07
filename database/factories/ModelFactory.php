@@ -26,13 +26,8 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'url' => $faker->url,
         'content' => $faker->realtext(rand(200, 4000)),
         'created_by' => rand(1, 50),
+        'votes' => rand(-20, 20)
     ];
 });
 
-$factory->define(App\Models\Vote::class, function (Faker\Generator $faker) {
-    return [
-        'vote' => rand(-1, 1),
-        'user_id' => rand(1, 50),
-        'post_id' => rand(1, 100),
-    ];
-});
+
